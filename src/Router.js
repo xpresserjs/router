@@ -2,34 +2,16 @@ const clone = require('lodash.clone');
 const Route = require('./Route');
 
 /**
- * Push Route To AllRoutes
- * @param {Router} $this
- * @param method
- * @param path
- * @param action
- * @function
- * @return {Route}
+ * XpresserRouter
  */
-function pushToRoute($this, method, path, action) {
-    if (action === undefined && path.substr(0, 1) === '@') {
-        path = path.substr(1);
-        action = path;
-    }
-
-    let eachRoute = new Route(method, path, action);
-    $this.routes.push(eachRoute);
-
-    return eachRoute;
-}
-
-class Router {
+class XpresserRouter {
     /**
      * Set path or grouped routes
      * @param {string} path
      * @param {function} routes
      *
      * @method
-     * 
+     *
      *
      * @returns {Route}
      */
@@ -56,79 +38,97 @@ class Router {
     }
 
     /**
-     * Express Router All
+     * Express XpresserRouter All
      * @param {string} path
      * @param {string} [action]
      *
      * @method
-     * 
+     *
      *
      * @returns {Route}
      */
     all(path, action) {
-        return pushToRoute(this, 'all', path, action);
+        return this.addRoute('all', path, action);
     }
 
     /**
-     * Express Router Delete
+     * Express XpresserRouter Delete
      * @param {string} path
      * @param {string} [action]
      *
      * @method
-     * 
+     *
      *
      * @returns {Route}
      */
     delete(path, action) {
-        return pushToRoute(this, 'delete', path, action);
+        return this.addRoute('delete', path, action);
     }
 
     /**
-     * Express Router Get
+     * Express XpresserRouter Get
      * @param {string} path
      * @param {string} [action]
      *
      * @method
-     * 
+     *
      *
      * @returns {Route}
      */
     get(path, action) {
-        return pushToRoute(this, 'get', path, action);
+        return this.addRoute('get', path, action);
     }
 
     /**
-     * Express Router Post
+     * Express XpresserRouter Post
      * @param {string} path
      * @param {string} [action]
      *
      * @method
-     * 
+     *
      *
      * @returns {Route}
      */
     post(path, action) {
-        return pushToRoute(this, 'post', path, action);
+        return this.addRoute('post', path, action);
     }
 
     /**
-     * Express Router Put
+     * Express XpresserRouter Put
      * @param {string} path
      * @param {string} [action]
      *
      * @method
-     * 
+     *
      *
      * @returns {Route}
      */
     put(path, action) {
-        return pushToRoute(this, 'put', path, action);
+        return this.addRoute('put', path, action);
+    }
+
+    /**
+     * Push Route To AllRoutes
+     * @param method
+     * @param path
+     * @param action
+     *
+     * @return {Route}
+     */
+    addRoute(method, path, action) {
+        if (action === undefined && path.substr(0, 1) === '@') {
+            path = path.substr(1);
+            action = path;
+        }
+
+        let eachRoute = new Route(method, path, action);
+        this.routes.push(eachRoute);
+
+        return eachRoute;
     }
 }
 
-Router.prototype.routes = [];
+XpresserRouter.prototype.routes = [];
 
-/**
- * @type {Router}
- */
-module.exports = Router;
+
+module.exports = XpresserRouter;
