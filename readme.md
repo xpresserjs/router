@@ -52,7 +52,7 @@ module.exports = Router;
 | GET   | /     | HomeController@index |  |
 | GET   | /profile  |  HomeController@profile | {profile} |
 | GET   | /api  |  ApiController@auth | {api.auth}    |
-| POST  | /api  |  ApiController@auth | {api.login}   |
+| POST  | /api  |  ApiController@login | {api.login}   |
 | GET   | /api/users    |  ApiController@users | {api.users}   |
 | GET   | /api/user/:user   |  UserApiController@view | {api.user}    |
 | POST  | /api/user/:user   |  UserApiController@update | {api.user}    |
