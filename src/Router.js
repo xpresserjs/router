@@ -128,4 +128,7 @@ class Router {
 
 Router.prototype.routes = [];
 
-module.exports = {Route: new Router(), Router};
+/**
+ * @type {Router}
+ */
+module.exports = Router;
