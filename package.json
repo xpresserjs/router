@@ -2,7 +2,7 @@
   "name": "@xpresser/router",
   "version": "0.0.1",
   "description": "Router for Xpresser Framework",
-  "main": "test.js",
+  "main": "index.js",
   "repository": "https://github.com/xpresserjs/router.git",
   "author": "xpresserjs",
   "license": "MIT",
