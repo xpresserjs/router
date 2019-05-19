@@ -1,13 +1,13 @@
-/**
- * EachRoute Properties
- * @class
- */
-class Route {
+'use strict';
+
+
+class XpresserRoute {
+
     /**
      * @param {string} method
      * @param {string} path
      * @param {string} controller
-     * @returns {Route}
+     * @returns {XpresserRoute}
      */
     constructor(method, path, controller) {
         if (method === 'children') {
@@ -21,7 +21,7 @@ class Route {
     /**
      * Set name this of route.
      * @param {string} name
-     * @returns {Route}
+     * @returns {XpresserRoute}
      */
     name(name) {
         this.data['name'] = name;
@@ -31,7 +31,7 @@ class Route {
     /**
      * Set group prefix name of this route.
      * @param {string} as
-     * @returns {Route}
+     * @returns {XpresserRoute}
      */
     as(as) {
         this.data['as'] = as;
@@ -42,7 +42,7 @@ class Route {
      * Set Controller of this route
      * @param {string|function} controller
      * @param {boolean} [actionsAsName=false]
-     * @returns {Route}
+     * @returns {XpresserRoute}
      */
     controller(controller, actionsAsName = false) {
         this.data['controller'] = controller;
@@ -54,7 +54,7 @@ class Route {
 
     /**
      * Set name of this route using method name
-     * @returns {Route}
+     * @returns {XpresserRoute}
      */
     actionAsName() {
         if (typeof this.data.children !== 'undefined')
@@ -79,7 +79,7 @@ class Route {
 
     /**
      * Sets names of every route in group as their method name
-     * @returns {Route}
+     * @returns {XpresserRoute}
      */
     actionsAsName() {
         this.data['useMethodAsName'] = true;
@@ -87,6 +87,6 @@ class Route {
     }
 }
 
-Route.prototype.data = {};
+XpresserRoute.prototype.data = {};
 
-module.exports = Route;
+module.exports = XpresserRoute;

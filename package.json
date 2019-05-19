@@ -2,11 +2,10 @@
   "name": "@xpresser/router",
   "version": "0.0.5",
   "description": "Router for Xpresser Framework",
-  "main": "src/Router.js",
+  "main": "index.js",
   "repository": "https://github.com/xpresserjs/router.git",
   "author": "xpresserjs",
   "license": "MIT",
-  "private": false,
   "dependencies": {
     "lodash.clone": "^4.5.0"
   }
