@@ -58,7 +58,7 @@ class XpresserRoute {
     controller(controller, actionsAsName = false) {
 
         if (this.namespace.length) {
-            this.data['controller'] = this.namespace + '>' + controller;
+            this.data['controller'] = this.namespace + '::' + controller;
         } else {
             this.data['controller'] = controller;
         }
