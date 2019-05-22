@@ -7,14 +7,25 @@ class XpresserRoute {
      * @param {string} method
      * @param {string} path
      * @param {string} controller
+     * @param {string} [namespace]
      * @returns {XpresserRoute}
      */
-    constructor(method, path, controller) {
+    constructor(method, path, controller, namespace = '') {
         if (method === 'children') {
-            this.data = {path, children: controller}
+            this.data = {
+                path,
+                children: controller
+            }
         } else {
-            this.data = {method, path, controller}
+            this.data = {
+                method,
+                path,
+                controller
+            }
         }
+
+        this.namespace = namespace;
+
         return this;
     }
 
@@ -45,7 +56,13 @@ class XpresserRoute {
      * @returns {XpresserRoute}
      */
     controller(controller, actionsAsName = false) {
-        this.data['controller'] = controller;
+
+        if (this.namespace.length) {
+            this.data['controller'] = this.namespace + '>' + controller;
+        } else {
+            this.data['controller'] = controller;
+        }
+
         if (actionsAsName === true) {
             return this.actionsAsName();
         }
@@ -88,5 +105,6 @@ class XpresserRoute {
 }
 
 XpresserRoute.prototype.data = {};
+XpresserRoute.prototype.namespace = "";
 
 module.exports = XpresserRoute;

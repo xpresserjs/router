@@ -6,6 +6,12 @@ const clone = require('lodash.clone');
 
 class XpresserRouter {
 
+    constructor(namespace = undefined) {
+        if (namespace !== undefined) {
+            this.namespace = namespace;
+        }
+    }
+
     /**
      * Set path or grouped routes
      * @param {string} path
@@ -28,7 +34,7 @@ class XpresserRouter {
         this.routes = oldRoutes;
 
 
-        const eachRoute = new XpresserRoute('children', path, thisRoutes);
+        const eachRoute = new XpresserRoute('children', path, thisRoutes, this.namespace);
 
         this.routes.push(eachRoute);
 
@@ -122,7 +128,7 @@ class XpresserRouter {
             action = path;
         }
 
-        let eachRoute = new XpresserRoute(method, path, action);
+        let eachRoute = new XpresserRoute(method, path, action, this.namespace);
         this.routes.push(eachRoute);
 
         return eachRoute;
@@ -130,6 +136,7 @@ class XpresserRouter {
 }
 
 XpresserRouter.prototype.routes = [];
+XpresserRouter.prototype.namespace = undefined;
 
 
 module.exports = XpresserRouter;
