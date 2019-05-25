@@ -123,6 +123,10 @@ class XpresserRouter {
      * @return {XpresserRoute}
      */
     addRoute(method, path, action) {
+        if(typeof action === "function"){
+            throw Error(`Action for ${path} cannot be a function use a string representing  a controller instead`)
+        }
+
         if (action === undefined && path.substr(0, 1) === '@') {
             path = path.substr(1);
             action = path;
