@@ -3,7 +3,8 @@
 Router for Xpresser Framework!
 
 ```javascript
-const Router = new (require('@xpresser/router'))();
+const XpresserRouter = require('@xpresser/router');
+const Router = new XpresserRouter();
 
 Router.get('/', 'Home@index');
 Router.get('/profile', 'Home@profile').name('profile');
@@ -11,15 +12,15 @@ Router.get('/profile', 'Home@profile').name('profile');
 Router
     .path('/api', () => {
     
-        Router.get('', 'auth');
-        Router.post('', 'login');
+        Router.get('=auth');
+        Router.post('=login');
         
         Router.get('@users');
         
         Router.path('user/:user', () => {
             
-            Router.get('', 'view');
-            Router.post('', 'update');
+            Router.get('=view');
+            Router.post('=update');
             
             Router.post('@ban');
             Router.delete('@delete');
@@ -28,7 +29,7 @@ Router
 
         Router.get('posts', 'PostApi@all').name('posts');
         
-        Router.path('post/:post', ()=> {
+        Router.path('post/:post', () => {
             
             Router.get('@view');
             Router.delete('@delete');

@@ -1,10 +1,10 @@
-'use strict';
-
-const XpresserRoute = require('./src/XpresserRoute');
-const clone = require('lodash.clone');
+import XpresserRoute from "./src/XpresserRoute";
+import clone from "lodash.clone";
 
 
 class XpresserRouter {
+    public namespace: string = "";
+    public routes: XpresserRoute[] = [];
 
     constructor(namespace = undefined) {
         if (namespace !== undefined) {
@@ -22,7 +22,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    path(path, routes) {
+    path(path: string, routes: (router?: this) => void): XpresserRoute {
         let oldRoutes = clone(this.routes);
 
         this.routes = [];
@@ -34,7 +34,7 @@ class XpresserRouter {
         this.routes = oldRoutes;
 
 
-        const eachRoute = new XpresserRoute('children', path, thisRoutes, this.namespace);
+        const eachRoute = new XpresserRoute("children", path, thisRoutes, this.namespace);
 
         this.routes.push(eachRoute);
 
@@ -43,7 +43,7 @@ class XpresserRouter {
     }
 
     /**
-     * Express XpresserRouter All
+     * XpresserRouter All
      * @param {string} path
      * @param {string} [action]
      *
@@ -52,12 +52,12 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    all(path, action) {
-        return this.addRoute('all', path, action);
+    all(path: string, action?: string) {
+        return this.addRoute("all", path, action);
     }
 
     /**
-     * Express XpresserRouter Delete
+     * XpresserRouter Delete
      * @param {string} path
      * @param {string} [action]
      *
@@ -66,12 +66,12 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    delete(path, action) {
-        return this.addRoute('delete', path, action);
+    delete(path: string, action?: string) {
+        return this.addRoute("delete", path, action);
     }
 
     /**
-     * Express XpresserRouter Get
+     * XpresserRouter Get
      * @param {string} path
      * @param {string} [action]
      *
@@ -80,12 +80,12 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    get(path, action) {
-        return this.addRoute('get', path, action);
+    get(path: string, action?: string) {
+        return this.addRoute("get", path, action);
     }
 
     /**
-     * Express XpresserRouter Post
+     * XpresserRouter Post
      * @param {string} path
      * @param {string} [action]
      *
@@ -94,12 +94,12 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    post(path, action) {
-        return this.addRoute('post', path, action);
+    post(path: string, action?: string) {
+        return this.addRoute("post", path, action);
     }
 
     /**
-     * Express XpresserRouter Put
+     * XpresserRouter Put
      * @param {string} path
      * @param {string} [action]
      *
@@ -108,8 +108,8 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    put(path, action) {
-        return this.addRoute('put', path, action);
+    put(path: string, action?: string) {
+        return this.addRoute("put", path, action);
     }
 
     /**
@@ -122,14 +122,25 @@ class XpresserRouter {
      *
      * @return {XpresserRoute}
      */
-    addRoute(method, path, action) {
-        if(typeof action === "function"){
+    addRoute(method: string, path: string, action?: string) {
+
+        if (typeof action === "function") {
             throw Error(`Action for ${path} cannot be a function use a string representing  a controller instead`)
         }
 
-        if (action === undefined && path.substr(0, 1) === '@') {
-            path = path.substr(1);
-            action = path;
+        if (action === undefined) {
+
+            if (path.substr(0, 1) === "=") {
+
+                action = path.substr(1);
+                path = "";
+
+            } else if (path.substr(0, 1) === "@") {
+
+                path = path.substr(1);
+                action = path;
+            }
+
         }
 
         let eachRoute = new XpresserRoute(method, path, action, this.namespace);
@@ -139,8 +150,4 @@ class XpresserRouter {
     }
 }
 
-XpresserRouter.prototype.routes = [];
-XpresserRouter.prototype.namespace = undefined;
-
-
-module.exports = XpresserRouter;
+export = XpresserRouter;

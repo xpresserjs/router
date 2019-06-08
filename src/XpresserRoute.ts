@@ -1,7 +1,18 @@
-'use strict';
+interface RouteData {
+    method?: string,
+    name?: string,
+    path: string,
+    controller?: string,
+    as?: string,
+    children?: RouteData[],
+    useMethodAsName?: boolean
+}
 
 
 class XpresserRoute {
+
+    public data: RouteData;
+    public namespace: string = "";
 
     /**
      * @param {string} method
@@ -10,17 +21,18 @@ class XpresserRoute {
      * @param {string} [namespace]
      * @returns {XpresserRoute}
      */
-    constructor(method, path, controller, namespace = '') {
+    constructor(method: string, path: string, controller: any, namespace: string = '') {
+
         if (method === 'children') {
             this.data = {
                 path,
-                children: controller
+                children: <RouteData[]>controller
             }
         } else {
             this.data = {
                 method,
                 path,
-                controller
+                controller: <string>controller
             }
         }
 
@@ -34,7 +46,7 @@ class XpresserRoute {
      * @param {string} name
      * @returns {XpresserRoute}
      */
-    name(name) {
+    name(name: string): this {
         this.data['name'] = name;
         return this;
     }
@@ -44,18 +56,18 @@ class XpresserRoute {
      * @param {string} as
      * @returns {XpresserRoute}
      */
-    as(as) {
+    as(as: string): this {
         this.data['as'] = as;
         return this;
     }
 
     /**
      * Set Controller of this route
-     * @param {string|function} controller
+     * @param {string} controller
      * @param {boolean} [actionsAsName=false]
      * @returns {XpresserRoute}
      */
-    controller(controller, actionsAsName = false) {
+    controller(controller: string, actionsAsName: boolean = false): this {
 
         if (this.namespace.length) {
             this.data['controller'] = this.namespace + '::' + controller;
@@ -73,7 +85,7 @@ class XpresserRoute {
      * Set name of this route using method name
      * @returns {XpresserRoute}
      */
-    actionAsName() {
+    actionAsName(): this {
         if (typeof this.data.children !== 'undefined')
             throw new Error(`actionAsName cannot be used on Route, use actionsAsName instead, difference is action is plural.`);
 
@@ -83,7 +95,7 @@ class XpresserRoute {
             throw new Error('Method: ' + controller + ' not found!');
 
         let name = '';
-        if (controller.indexOf('@') >= 0) {
+        if (controller.indexOf("@") >= 0) {
             name = controller.split('@')[1];
         } else {
             name = controller;
@@ -98,13 +110,10 @@ class XpresserRoute {
      * Sets names of every route in group as their method name
      * @returns {XpresserRoute}
      */
-    actionsAsName() {
+    actionsAsName(): this {
         this.data['useMethodAsName'] = true;
         return this;
     }
 }
 
-XpresserRoute.prototype.data = {};
-XpresserRoute.prototype.namespace = "";
-
-module.exports = XpresserRoute;
+export = XpresserRoute;
