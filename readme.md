@@ -2,6 +2,8 @@
 
 Router for Xpresser Framework!
 
+Written in Typescript.
+
 ```javascript
 const XpresserRouter = require('@xpresser/router');
 const Router = new XpresserRouter();
