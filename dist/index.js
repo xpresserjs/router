@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const XpresserRoute_1 = __importDefault(require("./src/XpresserRoute"));
-const lodash_clone_1 = __importDefault(require("lodash.clone"));
+const XpresserRoute = require("./src/XpresserRoute");
+const clone = require("lodash.clone");
 class XpresserRouter {
     constructor(namespace = undefined) {
         this.namespace = "";
@@ -23,12 +20,12 @@ class XpresserRouter {
      * @returns {XpresserRoute}
      */
     path(path, routes) {
-        let oldRoutes = lodash_clone_1.default(this.routes);
+        let oldRoutes = clone(this.routes);
         this.routes = [];
         routes(this);
-        let thisRoutes = lodash_clone_1.default(this.routes);
+        let thisRoutes = clone(this.routes);
         this.routes = oldRoutes;
-        const eachRoute = new XpresserRoute_1.default("children", path, thisRoutes, this.namespace);
+        const eachRoute = new XpresserRoute("children", path, thisRoutes, this.namespace);
         this.routes.push(eachRoute);
         return eachRoute;
     }
@@ -121,7 +118,7 @@ class XpresserRouter {
                 action = path;
             }
         }
-        let eachRoute = new XpresserRoute_1.default(method, path, action, this.namespace);
+        let eachRoute = new XpresserRoute(method, path, action, this.namespace);
         this.routes.push(eachRoute);
         return eachRoute;
     }

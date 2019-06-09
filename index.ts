@@ -1,5 +1,5 @@
-import XpresserRoute from "./src/XpresserRoute";
-import clone from "lodash.clone";
+import XpresserRoute = require("./src/XpresserRoute");
+import clone = require("lodash.clone");
 
 
 class XpresserRouter {
