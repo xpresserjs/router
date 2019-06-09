@@ -22,7 +22,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    path(path: string, routes: (router?: this) => void): XpresserRoute {
+    public path(path: string, routes: (router?: this) => void): XpresserRoute {
         let oldRoutes = clone(this.routes);
 
         this.routes = [];
@@ -52,7 +52,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    all(path: string, action?: string) {
+    public all(path: string, action?: string) {
         return this.addRoute("all", path, action);
     }
 
@@ -66,7 +66,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    delete(path: string, action?: string) {
+    public delete(path: string, action?: string) {
         return this.addRoute("delete", path, action);
     }
 
@@ -80,7 +80,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    get(path: string, action?: string) {
+    public get(path: string, action?: string) {
         return this.addRoute("get", path, action);
     }
 
@@ -94,7 +94,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    post(path: string, action?: string) {
+    public post(path: string, action?: string) {
         return this.addRoute("post", path, action);
     }
 
@@ -108,7 +108,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    put(path: string, action?: string) {
+    public put(path: string, action?: string) {
         return this.addRoute("put", path, action);
     }
 
@@ -122,7 +122,7 @@ class XpresserRouter {
      *
      * @return {XpresserRoute}
      */
-    addRoute(method: string, path: string, action?: string) {
+    public addRoute(method: string, path: string, action?: string) {
 
         if (typeof action === "function") {
             throw Error(`Action for ${path} cannot be a function use a string representing  a controller instead`)
@@ -148,6 +148,8 @@ class XpresserRouter {
 
         return eachRoute;
     }
+
+    public routesAfterPlugins(): void {};
 }
 
 export = XpresserRouter;

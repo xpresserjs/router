@@ -122,6 +122,8 @@ class XpresserRouter {
         this.routes.push(eachRoute);
         return eachRoute;
     }
+    routesAfterPlugins() { }
+    ;
 }
 module.exports = XpresserRouter;
 //# sourceMappingURL=index.js.map
