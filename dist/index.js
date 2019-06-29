@@ -113,7 +113,7 @@ class XpresserRouter {
                 action = path.substr(1);
                 path = "";
             }
-            else if (path.substr(0, 1) === "@") {
+            else if (path.substr(0, 1) === "@" || path.includes('@')) {
                 path = path.substr(1);
                 action = path;
             }
@@ -122,7 +122,8 @@ class XpresserRouter {
         this.routes.push(eachRoute);
         return eachRoute;
     }
-    routesAfterPlugins() { }
+    routesAfterPlugins() {
+    }
     ;
 }
 module.exports = XpresserRouter;
