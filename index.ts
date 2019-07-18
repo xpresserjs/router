@@ -1,7 +1,8 @@
 import XpresserRoute = require("./src/XpresserRoute");
 import clone = require("lodash.clone");
 
-type StringOrFunction = string;
+type RequestHandler = (xpresser?: any) => any;
+type StringOrFunction = RequestHandler | string;
 
 class XpresserRouter {
     public namespace: string = "";
