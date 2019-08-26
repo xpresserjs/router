@@ -1,12 +1,15 @@
 interface RouteData {
     method?: string,
     name?: string,
-    path: string,
+    path: StringOrRegExp,
     controller?: string,
     as?: string,
     children?: RouteData[],
     useMethodAsName?: boolean
 }
+
+type StringOrRegExp = String | RegExp;
+
 
 
 class XpresserRoute {
@@ -21,7 +24,7 @@ class XpresserRoute {
      * @param {string} [namespace]
      * @returns {XpresserRoute}
      */
-    constructor(method: string, path: string, controller: any, namespace: string = '') {
+    constructor(method: string, path: StringOrRegExp, controller: any, namespace: string = '') {
 
         if (method === 'children') {
             this.data = {

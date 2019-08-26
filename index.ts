@@ -3,6 +3,7 @@ import clone = require("lodash.clone");
 
 type RequestHandler = (xpresser?: any) => any;
 type StringOrFunction = RequestHandler | string;
+type StringOrRegExp = String | RegExp;
 
 class XpresserRouter {
     public namespace: string = "";
@@ -24,7 +25,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    public path(path: string, routes: (router?: this) => void): XpresserRoute {
+    public path(path: StringOrRegExp, routes: (router?: this) => void): XpresserRoute {
         let oldRoutes = clone(this.routes);
 
         this.routes = [];
@@ -54,7 +55,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    public all(path: string, action?: StringOrFunction) {
+    public all(path: StringOrRegExp, action?: StringOrFunction) {
         return this.addRoute("all", path, action);
     }
 
@@ -68,7 +69,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    public delete(path: string, action?: StringOrFunction) {
+    public delete(path: StringOrRegExp, action?: StringOrFunction) {
         return this.addRoute("delete", path, action);
     }
 
@@ -82,7 +83,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    public get(path: string, action?: StringOrFunction) {
+    public get(path: StringOrRegExp, action?: StringOrFunction) {
         return this.addRoute("get", path, action);
     }
 
@@ -96,7 +97,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    public post(path: string, action?: StringOrFunction) {
+    public post(path: StringOrRegExp, action?: StringOrFunction) {
         return this.addRoute("post", path, action);
     }
 
@@ -110,7 +111,7 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    public put(path: string, action?: StringOrFunction) {
+    public put(path: StringOrRegExp, action?: StringOrFunction) {
         return this.addRoute("put", path, action);
     }
 
@@ -124,13 +125,15 @@ class XpresserRouter {
      *
      * @return {XpresserRoute}
      */
-    public addRoute(method: string, path: string, action?: StringOrFunction) {
+    public addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction) {
 
         /*if (typeof action === "function") {
             throw Error(`Action for ${path} cannot be a function use a string representing  a controller instead`)
         }*/
 
-        if (action === undefined) {
+
+        if (typeof path === "string" && action === undefined) {
+
 
             if (path.substr(0, 1) === "=") {
 
@@ -141,7 +144,7 @@ class XpresserRouter {
             } else if (path.substr(0, 1) === "@" || path.includes('@')) {
 
                 path = path.substr(1);
-                action = path;
+                action = <string>path;
             }
 
         }
