@@ -77,14 +77,140 @@ class XpresserRouter {
      * XpresserRouter Get
      * @param {string} path
      * @param {StringOrFunction} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     public get(path: StringOrRegExp, action?: StringOrFunction) {
         return this.addRoute("get", path, action);
+    }
+
+    /**
+     * XpresserRouter Checkout
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public checkout(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("checkout", path, action);
+    }
+
+    /**
+     * XpresserRouter Copy
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public copy(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("copy", path, action);
+    }
+
+    /**
+     * XpresserRouter Head
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public head(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("head", path, action);
+    }
+
+    /**
+     * XpresserRouter Lock
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public lock(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("lock", path, action);
+    }
+
+    /**
+     * XpresserRouter Merge
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public merge(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("merge", path, action);
+    }
+
+    /**
+     * XpresserRouter Mkactivity
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public mkactivity(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("mkactivity", path, action);
+    }
+
+    /**
+     * XpresserRouter Mkcol
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public mkcol(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("mkcol", path, action);
+    }
+
+    /**
+     * XpresserRouter Move
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public move(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("move", path, action);
+    }
+
+    /**
+     * XpresserRouter M-Search
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public mSearch(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("m-search", path, action);
+    }
+
+    /**
+     * XpresserRouter Notify
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public notify(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("notify", path, action);
+    }
+
+    /**
+     * XpresserRouter Options
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public options(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("options", path, action);
+    }
+
+    /**
+     * XpresserRouter Patch
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public patch(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("path", path, action);
+    }
+
+    /**
+     * XpresserRouter Purge
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public purge(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("purge", path, action);
     }
 
     /**
@@ -102,6 +228,16 @@ class XpresserRouter {
     }
 
     /**
+     * XpresserRouter Report
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public report(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("report", path, action);
+    }
+
+    /**
      * XpresserRouter Put
      * @param {string} path
      * @param {string} [action]
@@ -113,6 +249,56 @@ class XpresserRouter {
      */
     public put(path: StringOrRegExp, action?: StringOrFunction) {
         return this.addRoute("put", path, action);
+    }
+
+    /**
+     * XpresserRouter Search
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public search(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("search", path, action);
+    }
+
+    /**
+     * XpresserRouter Subscribe
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public subscribe(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("subscribe", path, action);
+    }
+
+    /**
+     * XpresserRouter Trace
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public trace(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("trace", path, action);
+    }
+
+    /**
+     * XpresserRouter Unlock
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public unlock(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("unlock", path, action);
+    }
+
+    /**
+     * XpresserRouter Get
+     * @param {string} path
+     * @param {StringOrFunction} [action]
+     * @returns {XpresserRoute}
+     */
+    public unsubscribe(path: StringOrRegExp, action?: StringOrFunction) {
+        return this.addRoute("unsubscribe", path, action);
     }
 
     /**
