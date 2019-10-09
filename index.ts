@@ -1,4 +1,6 @@
 import XpresserRoute = require("./src/XpresserRoute");
+import XpresserPath = require("./src/XpresserPath");
+
 import clone = require("lodash.clone");
 
 type RequestHandler = (xpresser?: any) => any;
@@ -7,7 +9,7 @@ type StringOrRegExp = String | RegExp;
 
 class XpresserRouter {
     public namespace: string = "";
-    public routes: XpresserRoute[] = [];
+    public routes: (XpresserRoute | XpresserPath)[] = [];
 
     constructor(namespace = undefined) {
         if (namespace !== undefined) {
@@ -23,22 +25,24 @@ class XpresserRouter {
      * @method
      *
      *
-     * @returns {XpresserRoute}
+     * @returns {XpresserPath}
      */
-    public path(path: StringOrRegExp, routes: (router?: this) => void): XpresserRoute {
-        let oldRoutes = clone(this.routes);
+    public path(path: StringOrRegExp, routes?: (router?: this) => false): XpresserPath {
+        let thisRoutes = undefined;
 
-        this.routes = [];
+        if (typeof routes === "function") {
+            let oldRoutes = clone(this.routes);
 
-        routes(this);
+            this.routes = [];
 
-        let thisRoutes = clone(this.routes);
+            routes(this);
 
-        this.routes = oldRoutes;
+            thisRoutes = clone(this.routes);
 
+            this.routes = oldRoutes;
+        }
 
-        const eachRoute = new XpresserRoute("children", path, thisRoutes, this.namespace);
-
+        const eachRoute = new XpresserPath("children", path, thisRoutes, this.namespace);
         this.routes.push(eachRoute);
 
 

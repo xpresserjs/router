@@ -1,5 +1,6 @@
 "use strict";
 const XpresserRoute = require("./src/XpresserRoute");
+const XpresserPath = require("./src/XpresserPath");
 const clone = require("lodash.clone");
 class XpresserRouter {
     constructor(namespace = undefined) {
@@ -17,15 +18,18 @@ class XpresserRouter {
      * @method
      *
      *
-     * @returns {XpresserRoute}
+     * @returns {XpresserPath}
      */
     path(path, routes) {
-        let oldRoutes = clone(this.routes);
-        this.routes = [];
-        routes(this);
-        let thisRoutes = clone(this.routes);
-        this.routes = oldRoutes;
-        const eachRoute = new XpresserRoute("children", path, thisRoutes, this.namespace);
+        let thisRoutes = undefined;
+        if (typeof routes === "function") {
+            let oldRoutes = clone(this.routes);
+            this.routes = [];
+            routes(this);
+            thisRoutes = clone(this.routes);
+            this.routes = oldRoutes;
+        }
+        const eachRoute = new XpresserPath("children", path, thisRoutes, this.namespace);
         this.routes.push(eachRoute);
         return eachRoute;
     }

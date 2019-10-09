@@ -9,19 +9,11 @@ class XpresserRoute {
      */
     constructor(method, path, controller, namespace = '') {
         this.namespace = "";
-        if (method === 'children') {
-            this.data = {
-                path,
-                children: controller
-            };
-        }
-        else {
-            this.data = {
-                method,
-                path,
-                controller: controller
-            };
-        }
+        this.data = {
+            method,
+            path,
+            controller: controller
+        };
         this.namespace = namespace;
         return this;
     }
@@ -35,29 +27,16 @@ class XpresserRoute {
         return this;
     }
     /**
-     * Set group prefix name of this route.
-     * @param {string} as
-     * @returns {XpresserRoute}
-     */
-    as(as) {
-        this.data['as'] = as;
-        return this;
-    }
-    /**
      * Set Controller of this route
      * @param {string} controller
-     * @param {boolean} [actionsAsName=false]
      * @returns {XpresserRoute}
      */
-    controller(controller, actionsAsName = false) {
+    controller(controller) {
         if (this.namespace.length) {
             this.data['controller'] = this.namespace + '::' + controller;
         }
         else {
             this.data['controller'] = controller;
-        }
-        if (actionsAsName === true) {
-            return this.actionsAsName();
         }
         return this;
     }
@@ -66,8 +45,6 @@ class XpresserRoute {
      * @returns {XpresserRoute}
      */
     actionAsName() {
-        if (typeof this.data.children !== 'undefined')
-            throw new Error(`actionAsName cannot be used on Route, use actionsAsName instead, difference is action is plural.`);
         const controller = this.data.controller;
         if (!controller)
             throw new Error('Method: ' + controller + ' not found!');
@@ -79,14 +56,6 @@ class XpresserRoute {
             name = controller;
         }
         this.name(name);
-        return this;
-    }
-    /**
-     * Sets names of every route in group as their method name
-     * @returns {XpresserRoute}
-     */
-    actionsAsName() {
-        this.data['useMethodAsName'] = true;
         return this;
     }
 }
