@@ -1,6 +1,6 @@
 {
   "name": "@xpresser/router",
-  "version": "0.0.16",
+  "version": "1.0.0",
   "description": "Router for Xpresser Framework",
   "main": "dist/index.js",
   "repository": "https://github.com/xpresserjs/router.git",
