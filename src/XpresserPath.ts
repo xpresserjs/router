@@ -2,7 +2,7 @@ interface RoutePathData {
     method?: string,
     path: StringOrRegExp,
     controller?: string,
-    middleware?: string,
+    middleware?: string | string[],
     as?: string,
     children?: RoutePathData[],
     useActionsAsName?: boolean
@@ -76,9 +76,17 @@ class XpresserPath {
      * Add middleware for all routes in path
      * @param {string} middleware
      */
-    middleware(middleware: string): this {
+    middleware(middleware: string | string[]): this {
         this.data['middleware'] = middleware;
         return this
+    }
+
+    /**
+     * Add middleware's to all routes
+     * @param middlewares
+     */
+    middlewares(middlewares: string[]): this {
+        return this.middleware(middlewares);
     }
 
     /**

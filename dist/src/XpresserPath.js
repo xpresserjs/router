@@ -57,6 +57,13 @@ class XpresserPath {
         return this;
     }
     /**
+     * Add middleware's to all routes
+     * @param middlewares
+     */
+    middlewares(middlewares) {
+        return this.middleware(middlewares);
+    }
+    /**
      * Sets names of every route in group as their method name
      * @returns {XpresserRoute}
      */
