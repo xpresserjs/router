@@ -10,6 +10,6 @@
     "lodash.clone": "^4.5.0"
   },
   "devDependencies": {
-    "xpresser": "^0.1.5"
+    "xpresser": "^0.1.55"
   }
 }
