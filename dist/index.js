@@ -2,6 +2,7 @@
 const XpresserRoute = require("./src/XpresserRoute");
 const XpresserPath = require("./src/XpresserPath");
 const clone = require("lodash.clone");
+const snakeCase = require("lodash.snakecase");
 class XpresserRouter {
     constructor(namespace = undefined) {
         this.namespace = "";
@@ -287,6 +288,7 @@ class XpresserRouter {
             else if (path.substr(0, 1) === "@" || path.includes('@')) {
                 path = path.substr(1);
                 action = path;
+                path = snakeCase(path);
             }
         }
         let eachRoute = new XpresserRoute(method, path, action, this.namespace);

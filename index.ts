@@ -2,6 +2,7 @@ import XpresserRoute = require("./src/XpresserRoute");
 import XpresserPath = require("./src/XpresserPath");
 
 import clone = require("lodash.clone");
+import snakeCase = require("lodash.snakecase");
 
 type RequestHandler = (xpresser?: any) => any;
 type StringOrFunction = RequestHandler | string;
@@ -335,6 +336,7 @@ class XpresserRouter {
 
                 path = path.substr(1);
                 action = <string>path;
+                path = snakeCase(path);
             }
 
         }
