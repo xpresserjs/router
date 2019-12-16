@@ -1,8 +1,8 @@
-import XpresserRoute = require("./src/XpresserRoute");
-import XpresserPath = require("./src/XpresserPath");
-
 import clone = require("lodash.clone");
 import snakeCase = require("lodash.snakecase");
+
+import XpresserRoute = require("./src/XpresserRoute");
+import XpresserPath = require("./src/XpresserPath");
 
 type RequestHandler = (xpresser?: any) => any;
 type StringOrFunction = RequestHandler | string;
@@ -347,8 +347,7 @@ class XpresserRouter {
         return eachRoute;
     }
 
-    public routesAfterPlugins(): void {
-    };
+    public routesAfterPlugins(): void {}
 }
 
 export = XpresserRouter;

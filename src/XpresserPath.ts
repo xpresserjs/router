@@ -43,7 +43,7 @@ class XpresserPath {
     /**
      * Set group prefix name of this route.
      * @param {string} as
-     * @returns {XpresserRoute}
+     * @returns {XpresserPath}
      */
     as(as: string): this {
         this.data['as'] = as;
@@ -54,7 +54,7 @@ class XpresserPath {
      * Set Controller of this route
      * @param {string} controller
      * @param {boolean} [actionsAsName=false]
-     * @returns {XpresserRoute}
+     * @returns {XpresserPath}
      */
     controller(controller: string, actionsAsName: boolean = false): this {
 
@@ -91,7 +91,7 @@ class XpresserPath {
 
     /**
      * Sets names of every route in group as their method name
-     * @returns {XpresserRoute}
+     * @returns {XpresserPath}
      */
     actionsAsName(): this {
         this.data['useActionsAsName'] = true;

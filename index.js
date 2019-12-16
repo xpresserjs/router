@@ -1,10 +1,11 @@
 "use strict";
-const clone = require("lodash.clone");
-const snakeCase = require("lodash.snakecase");
-const XpresserRoute = require("./src/XpresserRoute");
-const XpresserPath = require("./src/XpresserPath");
-class XpresserRouter {
-    constructor(namespace = undefined) {
+var clone = require("lodash.clone");
+var snakeCase = require("lodash.snakecase");
+var XpresserRoute = require("./src/XpresserRoute");
+var XpresserPath = require("./src/XpresserPath");
+var XpresserRouter = /** @class */ (function () {
+    function XpresserRouter(namespace) {
+        if (namespace === void 0) { namespace = undefined; }
         this.namespace = "";
         this.routes = [];
         if (namespace !== undefined) {
@@ -21,19 +22,19 @@ class XpresserRouter {
      *
      * @returns {XpresserPath}
      */
-    path(path, routes) {
-        let thisRoutes = undefined;
+    XpresserRouter.prototype.path = function (path, routes) {
+        var thisRoutes = undefined;
         if (typeof routes === "function") {
-            let oldRoutes = clone(this.routes);
+            var oldRoutes = clone(this.routes);
             this.routes = [];
             routes(this);
             thisRoutes = clone(this.routes);
             this.routes = oldRoutes;
         }
-        const eachRoute = new XpresserPath("children", path, thisRoutes, this.namespace);
+        var eachRoute = new XpresserPath("children", path, thisRoutes, this.namespace);
         this.routes.push(eachRoute);
         return eachRoute;
-    }
+    };
     /**
      * XpresserRouter All
      * @param {string} path
@@ -44,9 +45,9 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    all(path, action) {
+    XpresserRouter.prototype.all = function (path, action) {
         return this.addRoute("all", path, action);
-    }
+    };
     /**
      * XpresserRouter Delete
      * @param {string} path
@@ -57,135 +58,135 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    delete(path, action) {
+    XpresserRouter.prototype["delete"] = function (path, action) {
         return this.addRoute("delete", path, action);
-    }
+    };
     /**
      * XpresserRouter Get
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    get(path, action) {
+    XpresserRouter.prototype.get = function (path, action) {
         return this.addRoute("get", path, action);
-    }
+    };
     /**
      * XpresserRouter Checkout
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    checkout(path, action) {
+    XpresserRouter.prototype.checkout = function (path, action) {
         return this.addRoute("checkout", path, action);
-    }
+    };
     /**
      * XpresserRouter Copy
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    copy(path, action) {
+    XpresserRouter.prototype.copy = function (path, action) {
         return this.addRoute("copy", path, action);
-    }
+    };
     /**
      * XpresserRouter Head
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    head(path, action) {
+    XpresserRouter.prototype.head = function (path, action) {
         return this.addRoute("head", path, action);
-    }
+    };
     /**
      * XpresserRouter Lock
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    lock(path, action) {
+    XpresserRouter.prototype.lock = function (path, action) {
         return this.addRoute("lock", path, action);
-    }
+    };
     /**
      * XpresserRouter Merge
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    merge(path, action) {
+    XpresserRouter.prototype.merge = function (path, action) {
         return this.addRoute("merge", path, action);
-    }
+    };
     /**
      * XpresserRouter Mkactivity
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    mkactivity(path, action) {
+    XpresserRouter.prototype.mkactivity = function (path, action) {
         return this.addRoute("mkactivity", path, action);
-    }
+    };
     /**
      * XpresserRouter Mkcol
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    mkcol(path, action) {
+    XpresserRouter.prototype.mkcol = function (path, action) {
         return this.addRoute("mkcol", path, action);
-    }
+    };
     /**
      * XpresserRouter Move
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    move(path, action) {
+    XpresserRouter.prototype.move = function (path, action) {
         return this.addRoute("move", path, action);
-    }
+    };
     /**
      * XpresserRouter M-Search
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    mSearch(path, action) {
+    XpresserRouter.prototype.mSearch = function (path, action) {
         return this.addRoute("m-search", path, action);
-    }
+    };
     /**
      * XpresserRouter Notify
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    notify(path, action) {
+    XpresserRouter.prototype.notify = function (path, action) {
         return this.addRoute("notify", path, action);
-    }
+    };
     /**
      * XpresserRouter Options
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    options(path, action) {
+    XpresserRouter.prototype.options = function (path, action) {
         return this.addRoute("options", path, action);
-    }
+    };
     /**
      * XpresserRouter Patch
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    patch(path, action) {
+    XpresserRouter.prototype.patch = function (path, action) {
         return this.addRoute("path", path, action);
-    }
+    };
     /**
      * XpresserRouter Purge
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    purge(path, action) {
+    XpresserRouter.prototype.purge = function (path, action) {
         return this.addRoute("purge", path, action);
-    }
+    };
     /**
      * XpresserRouter Post
      * @param {string} path
@@ -196,18 +197,18 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    post(path, action) {
+    XpresserRouter.prototype.post = function (path, action) {
         return this.addRoute("post", path, action);
-    }
+    };
     /**
      * XpresserRouter Report
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    report(path, action) {
+    XpresserRouter.prototype.report = function (path, action) {
         return this.addRoute("report", path, action);
-    }
+    };
     /**
      * XpresserRouter Put
      * @param {string} path
@@ -218,54 +219,54 @@ class XpresserRouter {
      *
      * @returns {XpresserRoute}
      */
-    put(path, action) {
+    XpresserRouter.prototype.put = function (path, action) {
         return this.addRoute("put", path, action);
-    }
+    };
     /**
      * XpresserRouter Search
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    search(path, action) {
+    XpresserRouter.prototype.search = function (path, action) {
         return this.addRoute("search", path, action);
-    }
+    };
     /**
      * XpresserRouter Subscribe
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    subscribe(path, action) {
+    XpresserRouter.prototype.subscribe = function (path, action) {
         return this.addRoute("subscribe", path, action);
-    }
+    };
     /**
      * XpresserRouter Trace
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    trace(path, action) {
+    XpresserRouter.prototype.trace = function (path, action) {
         return this.addRoute("trace", path, action);
-    }
+    };
     /**
      * XpresserRouter Unlock
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    unlock(path, action) {
+    XpresserRouter.prototype.unlock = function (path, action) {
         return this.addRoute("unlock", path, action);
-    }
+    };
     /**
      * XpresserRouter Get
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    unsubscribe(path, action) {
+    XpresserRouter.prototype.unsubscribe = function (path, action) {
         return this.addRoute("unsubscribe", path, action);
-    }
+    };
     /**
      * Push Route To AllRoutes
      * @param method
@@ -276,11 +277,12 @@ class XpresserRouter {
      *
      * @return {XpresserRoute}
      */
-    addRoute(method, path, action) {
+    XpresserRouter.prototype.addRoute = function (method, path, action) {
         /*if (typeof action === "function") {
             throw Error(`Action for ${path} cannot be a function use a string representing  a controller instead`)
         }*/
         if (typeof path === "string" && action === undefined) {
+            path = path;
             if (path.substr(0, 1) === "=") {
                 action = path.substr(1);
                 path = "";
@@ -291,10 +293,11 @@ class XpresserRouter {
                 path = snakeCase(path);
             }
         }
-        let eachRoute = new XpresserRoute(method, path, action, this.namespace);
+        var eachRoute = new XpresserRoute(method, path, action, this.namespace);
         this.routes.push(eachRoute);
         return eachRoute;
-    }
-    routesAfterPlugins() { }
-}
+    };
+    XpresserRouter.prototype.routesAfterPlugins = function () { };
+    return XpresserRouter;
+}());
 module.exports = XpresserRouter;

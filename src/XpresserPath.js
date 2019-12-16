@@ -1,5 +1,5 @@
 "use strict";
-class XpresserPath {
+var XpresserPath = /** @class */ (function () {
     /**
      * @param {string} method
      * @param {string} path
@@ -7,10 +7,11 @@ class XpresserPath {
      * @param {string} [namespace]
      * @returns {XpresserPath}
      */
-    constructor(method, path, routes, namespace = '') {
+    function XpresserPath(method, path, routes, namespace) {
+        if (namespace === void 0) { namespace = ''; }
         this.namespace = "";
         this.data = {
-            path,
+            path: path
         };
         if (routes) {
             this.data.children = routes;
@@ -26,17 +27,18 @@ class XpresserPath {
      * @param {string} as
      * @returns {XpresserPath}
      */
-    as(as) {
+    XpresserPath.prototype.as = function (as) {
         this.data['as'] = as;
         return this;
-    }
+    };
     /**
      * Set Controller of this route
      * @param {string} controller
      * @param {boolean} [actionsAsName=false]
      * @returns {XpresserPath}
      */
-    controller(controller, actionsAsName = false) {
+    XpresserPath.prototype.controller = function (controller, actionsAsName) {
+        if (actionsAsName === void 0) { actionsAsName = false; }
         if (this.namespace.length) {
             this.data['controller'] = this.namespace + '::' + controller;
         }
@@ -47,29 +49,30 @@ class XpresserPath {
             return this.actionsAsName();
         }
         return this;
-    }
+    };
     /**
      * Add middleware for all routes in path
      * @param {string} middleware
      */
-    middleware(middleware) {
+    XpresserPath.prototype.middleware = function (middleware) {
         this.data['middleware'] = middleware;
         return this;
-    }
+    };
     /**
      * Add middleware's to all routes
      * @param middlewares
      */
-    middlewares(middlewares) {
+    XpresserPath.prototype.middlewares = function (middlewares) {
         return this.middleware(middlewares);
-    }
+    };
     /**
      * Sets names of every route in group as their method name
      * @returns {XpresserPath}
      */
-    actionsAsName() {
+    XpresserPath.prototype.actionsAsName = function () {
         this.data['useActionsAsName'] = true;
         return this;
-    }
-}
+    };
+    return XpresserPath;
+}());
 module.exports = XpresserPath;
