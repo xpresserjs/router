@@ -3,6 +3,7 @@
   "version": "1.0.7",
   "description": "Router for Xpresser Framework",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "repository": "https://github.com/xpresserjs/router.git",
   "author": "xpresserjs",
   "license": "MIT",
