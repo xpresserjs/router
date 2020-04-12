@@ -1,4 +1,4 @@
-## Xpresser Router (Xjs)
+## XpresserJs Router
 
 Router for Xpresser Framework!
 
