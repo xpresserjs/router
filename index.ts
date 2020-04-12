@@ -318,11 +318,6 @@ class XpresserRouter {
      */
     public addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction) {
 
-        /*if (typeof action === "function") {
-            throw Error(`Action for ${path} cannot be a function use a string representing  a controller instead`)
-        }*/
-
-
         if (typeof path === "string" && action === undefined) {
 
 
