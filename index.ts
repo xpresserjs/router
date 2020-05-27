@@ -205,7 +205,7 @@ class XpresserRouter {
      * @returns {XpresserRoute}
      */
     public patch(path: StringOrRegExp, action?: StringOrFunction) {
-        return this.addRoute("path", path, action);
+        return this.addRoute("patch", path, action);
     }
 
     /**

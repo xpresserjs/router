@@ -175,7 +175,7 @@ class XpresserRouter {
      * @returns {XpresserRoute}
      */
     patch(path, action) {
-        return this.addRoute("path", path, action);
+        return this.addRoute("patch", path, action);
     }
     /**
      * XpresserRouter Purge
