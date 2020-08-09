@@ -16,8 +16,9 @@ class XpresserPath {
     public namespace: string = "";
 
     /**
+     * Constructor
      * @param {string} method
-     * @param {string} path
+     * @param {StringOrRegExp} path
      * @param {string} routes
      * @param {string} [namespace]
      * @returns {XpresserPath}
@@ -82,7 +83,7 @@ class XpresserPath {
     }
 
     /**
-     * Add middleware's to all routes
+     * Add middlewares to all routes
      * @param middlewares
      */
     middlewares(middlewares: string[]): this {

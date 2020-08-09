@@ -15,10 +15,6 @@ class XpresserRouter {
      * Set path or grouped routes
      * @param {string} path
      * @param {function} routes
-     *
-     * @method
-     *
-     *
      * @returns {XpresserPath}
      */
     path(path, routes) {
@@ -38,10 +34,6 @@ class XpresserRouter {
      * XpresserRouter All
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     all(path, action) {
@@ -51,10 +43,6 @@ class XpresserRouter {
      * XpresserRouter Delete
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     delete(path, action) {
@@ -190,10 +178,6 @@ class XpresserRouter {
      * XpresserRouter Post
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     post(path, action) {
@@ -212,10 +196,6 @@ class XpresserRouter {
      * XpresserRouter Put
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     put(path, action) {
@@ -271,9 +251,7 @@ class XpresserRouter {
      * @param method
      * @param path
      * @param action
-     *
      * @private
-     *
      * @return {XpresserRoute}
      */
     addRoute(method, path, action) {

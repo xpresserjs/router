@@ -14,6 +14,7 @@ class XpresserRoute {
     public namespace: string = "";
 
     /**
+     * Constructor
      * @param {string} method
      * @param {string} path
      * @param {string} controller

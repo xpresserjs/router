@@ -11,21 +11,13 @@ declare class XpresserRouter {
      * Set path or grouped routes
      * @param {string} path
      * @param {function} routes
-     *
-     * @method
-     *
-     *
      * @returns {XpresserPath}
      */
-    path(path: StringOrRegExp, routes?: (router?: this) => false): XpresserPath;
+    path(path: StringOrRegExp, routes?: (router?: this) => void): XpresserPath;
     /**
      * XpresserRouter All
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     all(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
@@ -33,10 +25,6 @@ declare class XpresserRouter {
      * XpresserRouter Delete
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     delete(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
@@ -142,10 +130,6 @@ declare class XpresserRouter {
      * XpresserRouter Post
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     post(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
@@ -160,10 +144,6 @@ declare class XpresserRouter {
      * XpresserRouter Put
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
     put(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
@@ -207,9 +187,7 @@ declare class XpresserRouter {
      * @param method
      * @param path
      * @param action
-     *
      * @private
-     *
      * @return {XpresserRoute}
      */
     addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;

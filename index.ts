@@ -22,13 +22,9 @@ class XpresserRouter {
      * Set path or grouped routes
      * @param {string} path
      * @param {function} routes
-     *
-     * @method
-     *
-     *
      * @returns {XpresserPath}
      */
-    public path(path: StringOrRegExp, routes?: (router?: this) => false): XpresserPath {
+    public path(path: StringOrRegExp, routes?: (router?: this) => void): XpresserPath {
         let thisRoutes = undefined;
 
         if (typeof routes === "function") {
@@ -54,13 +50,9 @@ class XpresserRouter {
      * XpresserRouter All
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
-    public all(path: StringOrRegExp, action?: StringOrFunction) {
+    public all(path: StringOrRegExp, action?: StringOrFunction) :XpresserRoute {
         return this.addRoute("all", path, action);
     }
 
@@ -68,13 +60,9 @@ class XpresserRouter {
      * XpresserRouter Delete
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
-    public delete(path: StringOrRegExp, action?: StringOrFunction) {
+    public delete(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("delete", path, action);
     }
 
@@ -84,7 +72,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public get(path: StringOrRegExp, action?: StringOrFunction) {
+    public get(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("get", path, action);
     }
 
@@ -94,7 +82,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public checkout(path: StringOrRegExp, action?: StringOrFunction) {
+    public checkout(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("checkout", path, action);
     }
 
@@ -104,7 +92,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public copy(path: StringOrRegExp, action?: StringOrFunction) {
+    public copy(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("copy", path, action);
     }
 
@@ -114,7 +102,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public head(path: StringOrRegExp, action?: StringOrFunction) {
+    public head(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("head", path, action);
     }
 
@@ -124,7 +112,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public lock(path: StringOrRegExp, action?: StringOrFunction) {
+    public lock(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("lock", path, action);
     }
 
@@ -134,7 +122,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public merge(path: StringOrRegExp, action?: StringOrFunction) {
+    public merge(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("merge", path, action);
     }
 
@@ -144,7 +132,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public mkactivity(path: StringOrRegExp, action?: StringOrFunction) {
+    public mkactivity(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("mkactivity", path, action);
     }
 
@@ -154,7 +142,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public mkcol(path: StringOrRegExp, action?: StringOrFunction) {
+    public mkcol(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("mkcol", path, action);
     }
 
@@ -164,7 +152,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public move(path: StringOrRegExp, action?: StringOrFunction) {
+    public move(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("move", path, action);
     }
 
@@ -174,7 +162,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public mSearch(path: StringOrRegExp, action?: StringOrFunction) {
+    public mSearch(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("m-search", path, action);
     }
 
@@ -184,7 +172,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public notify(path: StringOrRegExp, action?: StringOrFunction) {
+    public notify(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("notify", path, action);
     }
 
@@ -194,7 +182,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public options(path: StringOrRegExp, action?: StringOrFunction) {
+    public options(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("options", path, action);
     }
 
@@ -204,7 +192,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public patch(path: StringOrRegExp, action?: StringOrFunction) {
+    public patch(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("patch", path, action);
     }
 
@@ -214,7 +202,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public purge(path: StringOrRegExp, action?: StringOrFunction) {
+    public purge(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("purge", path, action);
     }
 
@@ -222,13 +210,9 @@ class XpresserRouter {
      * XpresserRouter Post
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
-    public post(path: StringOrRegExp, action?: StringOrFunction) {
+    public post(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("post", path, action);
     }
 
@@ -238,7 +222,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public report(path: StringOrRegExp, action?: StringOrFunction) {
+    public report(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("report", path, action);
     }
 
@@ -246,13 +230,9 @@ class XpresserRouter {
      * XpresserRouter Put
      * @param {string} path
      * @param {string} [action]
-     *
-     * @method
-     *
-     *
      * @returns {XpresserRoute}
      */
-    public put(path: StringOrRegExp, action?: StringOrFunction) {
+    public put(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("put", path, action);
     }
 
@@ -262,7 +242,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public search(path: StringOrRegExp, action?: StringOrFunction) {
+    public search(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("search", path, action);
     }
 
@@ -272,7 +252,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public subscribe(path: StringOrRegExp, action?: StringOrFunction) {
+    public subscribe(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("subscribe", path, action);
     }
 
@@ -282,7 +262,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public trace(path: StringOrRegExp, action?: StringOrFunction) {
+    public trace(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("trace", path, action);
     }
 
@@ -292,7 +272,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public unlock(path: StringOrRegExp, action?: StringOrFunction) {
+    public unlock(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("unlock", path, action);
     }
 
@@ -302,7 +282,7 @@ class XpresserRouter {
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
-    public unsubscribe(path: StringOrRegExp, action?: StringOrFunction) {
+    public unsubscribe(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("unsubscribe", path, action);
     }
 
@@ -311,12 +291,10 @@ class XpresserRouter {
      * @param method
      * @param path
      * @param action
-     *
      * @private
-     *
      * @return {XpresserRoute}
      */
-    public addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction) {
+    public addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction) : XpresserRoute {
 
         if (typeof path === "string" && action === undefined) {
 

@@ -9,6 +9,7 @@ declare class XpresserRoute {
     data: RouteData;
     namespace: string;
     /**
+     * Constructor
      * @param {string} method
      * @param {string} path
      * @param {string} controller

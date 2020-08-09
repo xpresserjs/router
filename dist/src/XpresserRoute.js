@@ -1,6 +1,7 @@
 "use strict";
 class XpresserRoute {
     /**
+     * Constructor
      * @param {string} method
      * @param {string} path
      * @param {string} controller
