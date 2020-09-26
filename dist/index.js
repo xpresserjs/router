@@ -260,16 +260,27 @@ class XpresserRouter {
                 action = path.substr(1);
                 path = "";
             }
-            else if (path.substr(0, 1) === "@" || path.includes('@')) {
+            else if (path.substr(0, 1) === "@") {
                 path = path.substr(1);
                 action = path;
                 path = snakeCase(path);
             }
         }
+        /**
+         * if instance has namespace, action is string and action includes `@` but not `::`
+         * We append namespace to action
+         *
+         * We exclude actions including `::`
+         * because a namespace may want to point to another namespace controller methods
+         */
+        if (this.namespace && typeof action === "string" && action.includes('@') && !action.includes('::')) {
+            action = this.namespace + '::' + action;
+        }
         let eachRoute = new XpresserRoute(method, path, action, this.namespace);
         this.routes.push(eachRoute);
         return eachRoute;
     }
-    routesAfterPlugins() { }
+    routesAfterPlugins() {
+    }
 }
 module.exports = XpresserRouter;

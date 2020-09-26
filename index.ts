@@ -52,7 +52,7 @@ class XpresserRouter {
      * @param {string} [action]
      * @returns {XpresserRoute}
      */
-    public all(path: StringOrRegExp, action?: StringOrFunction) :XpresserRoute {
+    public all(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("all", path, action);
     }
 
@@ -294,10 +294,9 @@ class XpresserRouter {
      * @private
      * @return {XpresserRoute}
      */
-    public addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction) : XpresserRoute {
+    public addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
 
         if (typeof path === "string" && action === undefined) {
-
 
             if (path.substr(0, 1) === "=") {
 
@@ -305,7 +304,7 @@ class XpresserRouter {
                 path = "";
 
 
-            } else if (path.substr(0, 1) === "@" || path.includes('@')) {
+            } else if (path.substr(0, 1) === "@") {
 
                 path = path.substr(1);
                 action = <string>path;
@@ -314,13 +313,25 @@ class XpresserRouter {
 
         }
 
+        /**
+         * if instance has namespace, action is string and action includes `@` but not `::`
+         * We append namespace to action
+         *
+         * We exclude actions including `::`
+         * because a namespace may want to point to another namespace controller methods
+         */
+        if (this.namespace && typeof action === "string" && action.includes('@') && !action.includes('::')) {
+            action = this.namespace + '::' + action
+        }
+
         let eachRoute = new XpresserRoute(method, path, action, this.namespace);
         this.routes.push(eachRoute);
 
         return eachRoute;
     }
 
-    public routesAfterPlugins(): void {}
+    public routesAfterPlugins(): void {
+    }
 }
 
 export = XpresserRouter;
