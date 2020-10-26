@@ -7,6 +7,8 @@ import XpresserPath = require("./src/XpresserPath");
 type RequestHandler = (xpresser?: any) => any;
 type StringOrFunction = RequestHandler | string;
 type StringOrRegExp = String | RegExp;
+type RouteArray = [string, (string | boolean)?, (string | boolean)?];
+type ManyRoutes = string[] | RouteArray[] | (string | RouteArray)[];
 
 class XpresserRouter {
     public namespace: string = "";
@@ -54,6 +56,10 @@ class XpresserRouter {
      */
     public all(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("all", path, action);
+    }
+
+    public getMany(routes: ManyRoutes): void {
+        this.addManyRoutes("get", routes)
     }
 
     /**
@@ -328,6 +334,28 @@ class XpresserRouter {
         this.routes.push(eachRoute);
 
         return eachRoute;
+    }
+
+    public addManyRoutes(method: string, routes: ManyRoutes): void {
+        for (const route of routes) {
+            if (typeof route === 'string') {
+                this.addRoute(method, route)
+            } else if (Array.isArray(route)) {
+                let [path, action, name] = route
+
+                // oif shortHand validate true as second param.
+                if (path[0] === '@' || path[0] === '=') {
+                    if (action && name === undefined) {
+                        name = action;
+                        action = undefined;
+                    }
+                }
+
+                let thisRoute = this.addRoute(method, path, action as any);
+                // Add name if has name
+                if (name) name === true ? thisRoute.actionAsName() : thisRoute.name(name as string);
+            }
+        }
     }
 
     public routesAfterPlugins(): void {

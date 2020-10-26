@@ -3,6 +3,8 @@ import XpresserPath = require("./src/XpresserPath");
 declare type RequestHandler = (xpresser?: any) => any;
 declare type StringOrFunction = RequestHandler | string;
 declare type StringOrRegExp = String | RegExp;
+declare type RouteArray = [string, (string | boolean)?, (string | boolean)?];
+declare type ManyRoutes = string[] | RouteArray[] | (string | RouteArray)[];
 declare class XpresserRouter {
     namespace: string;
     routes: (XpresserRoute | XpresserPath)[];
@@ -21,6 +23,7 @@ declare class XpresserRouter {
      * @returns {XpresserRoute}
      */
     all(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
+    getMany(routes: ManyRoutes): void;
     /**
      * XpresserRouter Delete
      * @param {string} path
@@ -191,6 +194,7 @@ declare class XpresserRouter {
      * @return {XpresserRoute}
      */
     addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
+    addManyRoutes(method: string, routes: ManyRoutes): void;
     routesAfterPlugins(): void;
 }
 export = XpresserRouter;

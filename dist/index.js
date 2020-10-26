@@ -39,6 +39,9 @@ class XpresserRouter {
     all(path, action) {
         return this.addRoute("all", path, action);
     }
+    getMany(routes) {
+        this.addManyRoutes("get", routes);
+    }
     /**
      * XpresserRouter Delete
      * @param {string} path
@@ -279,6 +282,27 @@ class XpresserRouter {
         let eachRoute = new XpresserRoute(method, path, action, this.namespace);
         this.routes.push(eachRoute);
         return eachRoute;
+    }
+    addManyRoutes(method, routes) {
+        for (const route of routes) {
+            if (typeof route === 'string') {
+                this.addRoute(method, route);
+            }
+            else if (Array.isArray(route)) {
+                let [path, action, name] = route;
+                // oif shortHand validate true as second param.
+                if (path[0] === '@' || path[0] === '=') {
+                    if (action && name === undefined) {
+                        name = action;
+                        action = undefined;
+                    }
+                }
+                let thisRoute = this.addRoute(method, path, action);
+                // Add name if has name
+                if (name)
+                    name === true ? thisRoute.actionAsName() : thisRoute.name(name);
+            }
+        }
     }
     routesAfterPlugins() {
     }

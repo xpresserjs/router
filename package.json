@@ -6,6 +6,9 @@
   "types": "types/index.d.ts",
   "repository": "https://github.com/xpresserjs/router.git",
   "author": "xpresserjs",
+  "scripts": {
+    "dev": "tsc --watch"
+  },
   "license": "MIT",
   "dependencies": {
     "lodash.clone": "^4.5.0",
