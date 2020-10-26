@@ -7,14 +7,14 @@ import XpresserPath = require("./src/XpresserPath");
 type RequestHandler = (xpresser?: any) => any;
 type StringOrFunction = RequestHandler | string;
 type StringOrRegExp = String | RegExp;
-type RouteArray = [string, (string | boolean)?, (string | boolean)?];
+type RouteArray = [StringOrRegExp, (string | boolean)?, (string | boolean)?];
 type ManyRoutes = string[] | RouteArray[] | (string | RouteArray)[];
 
 class XpresserRouter {
     public namespace: string = "";
     public routes: (XpresserRoute | XpresserPath)[] = [];
 
-    constructor(namespace = undefined) {
+    constructor(namespace?: string) {
         if (namespace !== undefined) {
             this.namespace = namespace;
         }
@@ -58,8 +58,14 @@ class XpresserRouter {
         return this.addRoute("all", path, action);
     }
 
-    public getMany(routes: ManyRoutes): void {
-        this.addManyRoutes("get", routes)
+    /**
+     * XpresserRouter Any
+     * @param {string} path
+     * @param {string} [action]
+     * @returns {XpresserRoute}
+     */
+    public any(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
+        return this.addRoute("all", path, action);
     }
 
     /**
@@ -73,6 +79,14 @@ class XpresserRouter {
     }
 
     /**
+     * Delete Many Routes
+     * @param {ManyRoutes} routes
+     */
+    public deleteMany(routes: ManyRoutes): void {
+        this.addManyRoutes("delete", routes)
+    }
+
+    /**
      * XpresserRouter Get
      * @param {string} path
      * @param {StringOrFunction} [action]
@@ -80,6 +94,14 @@ class XpresserRouter {
      */
     public get(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("get", path, action);
+    }
+
+    /**
+     * Get Many Routes
+     * @param {ManyRoutes} routes
+     */
+    public getMany(routes: ManyRoutes): void {
+        this.addManyRoutes("get", routes)
     }
 
     /**
@@ -203,6 +225,14 @@ class XpresserRouter {
     }
 
     /**
+     * Patch Many Routes
+     * @param {ManyRoutes} routes
+     */
+    public patchMany(routes: ManyRoutes): void {
+        this.addManyRoutes("patch", routes)
+    }
+
+    /**
      * XpresserRouter Purge
      * @param {string} path
      * @param {StringOrFunction} [action]
@@ -223,6 +253,14 @@ class XpresserRouter {
     }
 
     /**
+     * Post Many Routes
+     * @param {ManyRoutes} routes
+     */
+    public postMany(routes: ManyRoutes): void {
+        this.addManyRoutes("post", routes)
+    }
+
+    /**
      * XpresserRouter Report
      * @param {string} path
      * @param {StringOrFunction} [action]
@@ -240,6 +278,14 @@ class XpresserRouter {
      */
     public put(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("put", path, action);
+    }
+
+    /**
+     * Put Many Routes
+     * @param {ManyRoutes} routes
+     */
+    public putMany(routes: ManyRoutes): void {
+        this.addManyRoutes("put", routes)
     }
 
     /**
@@ -314,7 +360,7 @@ class XpresserRouter {
 
                 path = path.substr(1);
                 action = <string>path;
-                path = snakeCase(path);
+                path = snakeCase(path as string);
             }
 
         }
@@ -341,10 +387,11 @@ class XpresserRouter {
             if (typeof route === 'string') {
                 this.addRoute(method, route)
             } else if (Array.isArray(route)) {
-                let [path, action, name] = route
+                let [path, action, name]: RouteArray = route
 
-                // oif shortHand validate true as second param.
-                if (path[0] === '@' || path[0] === '=') {
+                // if shortHand validate true as second param.
+                const firstChar = (path as string).substr(0, 1);
+                if (firstChar === '@' || firstChar === '=') {
                     if (action && name === undefined) {
                         name = action;
                         action = undefined;

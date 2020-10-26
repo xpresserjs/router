@@ -3,12 +3,12 @@ import XpresserPath = require("./src/XpresserPath");
 declare type RequestHandler = (xpresser?: any) => any;
 declare type StringOrFunction = RequestHandler | string;
 declare type StringOrRegExp = String | RegExp;
-declare type RouteArray = [string, (string | boolean)?, (string | boolean)?];
+declare type RouteArray = [StringOrRegExp, (string | boolean)?, (string | boolean)?];
 declare type ManyRoutes = string[] | RouteArray[] | (string | RouteArray)[];
 declare class XpresserRouter {
     namespace: string;
     routes: (XpresserRoute | XpresserPath)[];
-    constructor(namespace?: any);
+    constructor(namespace?: string);
     /**
      * Set path or grouped routes
      * @param {string} path
@@ -23,7 +23,13 @@ declare class XpresserRouter {
      * @returns {XpresserRoute}
      */
     all(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
-    getMany(routes: ManyRoutes): void;
+    /**
+     * XpresserRouter Any
+     * @param {string} path
+     * @param {string} [action]
+     * @returns {XpresserRoute}
+     */
+    any(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
     /**
      * XpresserRouter Delete
      * @param {string} path
@@ -32,12 +38,22 @@ declare class XpresserRouter {
      */
     delete(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
     /**
+     * Delete Many Routes
+     * @param {ManyRoutes} routes
+     */
+    deleteMany(routes: ManyRoutes): void;
+    /**
      * XpresserRouter Get
      * @param {string} path
      * @param {StringOrFunction} [action]
      * @returns {XpresserRoute}
      */
     get(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
+    /**
+     * Get Many Routes
+     * @param {ManyRoutes} routes
+     */
+    getMany(routes: ManyRoutes): void;
     /**
      * XpresserRouter Checkout
      * @param {string} path
@@ -123,6 +139,11 @@ declare class XpresserRouter {
      */
     patch(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
     /**
+     * Patch Many Routes
+     * @param {ManyRoutes} routes
+     */
+    patchMany(routes: ManyRoutes): void;
+    /**
      * XpresserRouter Purge
      * @param {string} path
      * @param {StringOrFunction} [action]
@@ -137,6 +158,11 @@ declare class XpresserRouter {
      */
     post(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
     /**
+     * Post Many Routes
+     * @param {ManyRoutes} routes
+     */
+    postMany(routes: ManyRoutes): void;
+    /**
      * XpresserRouter Report
      * @param {string} path
      * @param {StringOrFunction} [action]
@@ -150,6 +176,11 @@ declare class XpresserRouter {
      * @returns {XpresserRoute}
      */
     put(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
+    /**
+     * Put Many Routes
+     * @param {ManyRoutes} routes
+     */
+    putMany(routes: ManyRoutes): void;
     /**
      * XpresserRouter Search
      * @param {string} path

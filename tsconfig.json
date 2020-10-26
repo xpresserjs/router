@@ -7,6 +7,7 @@
     "sourceMap": false,
     "outDir": "dist",
     "declaration": true,
+    "strict": true,
     /* Generates corresponding '.d.ts' file. */
     "declarationDir": "types"
   },
@@ -17,6 +18,7 @@
     "./**/*.ts"
   ],
   "exclude": [
-    "types"
+    "types",
+    "test.ts"
   ]
 }
