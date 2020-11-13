@@ -15,7 +15,7 @@ declare class XpresserRouter {
      * @param {function} routes
      * @returns {XpresserPath}
      */
-    path(path: StringOrRegExp, routes?: (router?: this) => void): XpresserPath;
+    path(path: StringOrRegExp, routes?: (router: this) => void): XpresserPath;
     /**
      * XpresserRouter All
      * @param {string} path
