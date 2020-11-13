@@ -26,7 +26,7 @@ class XpresserRouter {
      * @param {function} routes
      * @returns {XpresserPath}
      */
-    public path(path: StringOrRegExp, routes?: (router?: this) => void): XpresserPath {
+    public path(path: StringOrRegExp, routes?: (router: this) => void): XpresserPath {
         let thisRoutes = undefined;
 
         if (typeof routes === "function") {
