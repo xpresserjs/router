@@ -115,11 +115,14 @@ class XpresserRouter {
      * router.sendFile('/', 'about.html');
      */
     public sendFile<Http = any>(url: string, file: string, interceptor?: (http: Http) => Http) {
-        file = path.resolve(file);
+        const xpr = this.xpresserInstanceGetter ? this.xpresserInstanceGetter() : null;
+
+        if (!xpr) throw new Error("An Xpresser instance getter is required to use `router.sendFile`");
+
+        file = xpr.path.resolve(file, true);
         let hasFile = fs.existsSync(file);
 
-        if (this.xpresserInstanceGetter && !hasFile) {
-            const xpr = this.xpresserInstanceGetter();
+        if (!hasFile) {
             file = xpr.path.base(file);
             hasFile = fs.existsSync(file);
         }
