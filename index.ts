@@ -1,3 +1,6 @@
+import fs = require("fs");
+import path = require("path");
+
 import clone = require("lodash.clone");
 import snakeCase = require("lodash.snakecase");
 
@@ -13,10 +16,15 @@ type ManyRoutes = string[] | RouteArray[] | (string | RouteArray)[];
 class XpresserRouter {
     public namespace: string = "";
     public routes: (XpresserRoute | XpresserPath)[] = [];
+    private readonly xpresserInstanceGetter: (() => any) | undefined;
 
-    constructor(namespace?: string) {
+    constructor(namespace?: string, xpresserInstanceGetter?: () => any) {
         if (namespace !== undefined) {
             this.namespace = namespace;
+        }
+
+        if (xpresserInstanceGetter) {
+            this.xpresserInstanceGetter = xpresserInstanceGetter;
         }
     }
 
@@ -94,6 +102,54 @@ class XpresserRouter {
      */
     public get(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute {
         return this.addRoute("get", path, action);
+    }
+
+
+    /**
+     * Send file as response
+     * @param url
+     * @param file
+     * @param interceptor
+     *
+     * @example
+     * router.sendFile('/', 'about.html');
+     */
+    public sendFile<Http = any>(url: string, file: string, interceptor?: (http: Http) => Http) {
+        file = path.resolve(file);
+        let hasFile = fs.existsSync(file);
+
+        if (this.xpresserInstanceGetter && !hasFile) {
+            const xpr = this.xpresserInstanceGetter();
+            file = xpr.path.base(file);
+            hasFile = fs.existsSync(file);
+        }
+
+        const error = hasFile ? null : new Error();
+
+        const handler = (http: Http) => {
+
+            if (!hasFile) return (http as any).newError().view({
+                error: {
+                    title: 'File not found!',
+                    message: `Router could not find file "${file}"`,
+                    log: error?.stack
+                }
+            }, 404)
+
+            http = interceptor ? interceptor(http) : http;
+            return (http as any).res.sendFile(file);
+        };
+
+        try {
+            Object.defineProperty(handler, 'name', {
+                value: `getFile(${file})`,
+                enumerable: false,
+                writable: true
+            })
+        } catch (_err) {
+        }
+
+        return this.get(url, handler);
     }
 
     /**

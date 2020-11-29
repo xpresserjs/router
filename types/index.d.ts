@@ -8,7 +8,8 @@ declare type ManyRoutes = string[] | RouteArray[] | (string | RouteArray)[];
 declare class XpresserRouter {
     namespace: string;
     routes: (XpresserRoute | XpresserPath)[];
-    constructor(namespace?: string);
+    private readonly xpresserInstanceGetter;
+    constructor(namespace?: string, xpresserInstanceGetter?: () => any);
     /**
      * Set path or grouped routes
      * @param {string} path
@@ -49,6 +50,16 @@ declare class XpresserRouter {
      * @returns {XpresserRoute}
      */
     get(path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
+    /**
+     * Send file as response
+     * @param url
+     * @param file
+     * @param interceptor
+     *
+     * @example
+     * router.sendFile('/', 'about.html');
+     */
+    sendFile<Http = any>(url: string, file: string, interceptor?: (http: Http) => Http): XpresserRoute;
     /**
      * Get Many Routes
      * @param {ManyRoutes} routes
