@@ -466,6 +466,17 @@ class XpresserRouter {
 
     public routesAfterPlugins(): void {
     }
+
+    /**
+     * Set routes connected to on controller.
+     *
+     * Works only in paths
+     * @param controller
+     * @param routes
+     */
+    public useController(controller: string, routes: (router: this) => void): XpresserPath {
+        return this.path("", routes).controller(controller);
+    }
 }
 
 export = XpresserRouter;

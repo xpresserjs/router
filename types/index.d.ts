@@ -238,5 +238,13 @@ declare class XpresserRouter {
     addRoute(method: string, path: StringOrRegExp, action?: StringOrFunction): XpresserRoute;
     addManyRoutes(method: string, routes: ManyRoutes): void;
     routesAfterPlugins(): void;
+    /**
+     * Set routes connected to on controller.
+     *
+     * Works only in paths
+     * @param controller
+     * @param routes
+     */
+    useController(controller: string, routes: (router: this) => void): XpresserPath;
 }
 export = XpresserRouter;
