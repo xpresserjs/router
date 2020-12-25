@@ -1,6 +1,6 @@
 {
   "name": "@xpresser/router",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Router for Xpresser Framework",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
