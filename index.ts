@@ -1,8 +1,14 @@
 import fs = require("fs");
-import path = require("path");
 
-import clone = require("lodash.clone");
-import snakeCase = require("lodash.snakecase");
+
+// @ts-ignore
+const clone = require("lodash.clone");
+// @ts-ignore
+const snakeCase = require("lodash.snakecase");
+// Why are the above codes ts-ignored?
+// Installing the required types requires a production dependency
+// to work perfectly in consumers machine.
+// And we don't want that much prod. dependencies.
 
 import XpresserRoute = require("./src/XpresserRoute");
 import XpresserPath = require("./src/XpresserPath");
