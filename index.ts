@@ -12,12 +12,9 @@ const snakeCase = require("lodash.snakecase");
 
 import XpresserRoute = require("./src/XpresserRoute");
 import XpresserPath = require("./src/XpresserPath");
+import {ManyRoutes, RouteArray, StringOrFunction, StringOrRegExp} from "./src/custom-types";
 
-type RequestHandler = (xpresser?: any) => any;
-type StringOrFunction = RequestHandler | string;
-type StringOrRegExp = String | RegExp;
-type RouteArray = [StringOrRegExp, (string | boolean)?, (string | boolean)?];
-type ManyRoutes = string[] | RouteArray[] | (string | RouteArray)[];
+
 
 class XpresserRouter {
     public namespace: string = "";

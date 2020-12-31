@@ -1,11 +1,4 @@
-interface RouteData {
-    method?: string,
-    name?: string,
-    path: StringOrRegExp,
-    controller?: string
-}
-
-type StringOrRegExp = String | RegExp;
+import {RouteData, StringOrRegExp} from "./custom-types";
 
 
 class XpresserRoute {

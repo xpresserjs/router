@@ -1,14 +1,5 @@
-interface RoutePathData {
-    method?: string,
-    path: StringOrRegExp,
-    controller?: string,
-    middleware?: string | string[],
-    as?: string,
-    children?: RoutePathData[],
-    useActionsAsName?: boolean
-}
+import {RoutePathData, StringOrRegExp} from "./custom-types";
 
-type StringOrRegExp = String | RegExp;
 
 class XpresserPath {
 
