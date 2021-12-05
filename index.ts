@@ -21,7 +21,7 @@ class XpresserRouter {
 
             // Merge config with xpresser instance router config
             const $ = this.xpresserInstanceGetter();
-            this.config = merge(this.config, $.config.get("router", {}));
+            this.config = merge(this.config, $.config.get("server.router", {}));
         }
     }
 
