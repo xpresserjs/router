@@ -1,4 +1,4 @@
-import {RoutePathData, StringOrRegExp} from "./custom-types";
+import type {RoutePathData, StringOrRegExp} from "./custom-types";
 
 
 class XpresserPath {
@@ -56,7 +56,7 @@ class XpresserPath {
             this.data['controller'] = controller;
         }
 
-        if (actionsAsName === true) {
+        if (actionsAsName) {
             return this.actionsAsName();
         }
 

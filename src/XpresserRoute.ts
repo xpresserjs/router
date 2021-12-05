@@ -1,5 +1,4 @@
-import {RouteData, StringOrRegExp} from "./custom-types";
-
+import type {RouteData, StringOrRegExp} from "./custom-types";
 
 class XpresserRoute {
 
@@ -62,7 +61,7 @@ class XpresserRoute {
         if (!controller)
             throw new Error('Method: ' + controller + ' not found!');
 
-        let name = '';
+        let name;
         if (controller.indexOf("@") >= 0) {
             name = controller.split('@')[1];
         } else {

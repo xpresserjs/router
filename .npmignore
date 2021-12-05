@@ -1,3 +1,6 @@
 node_modules
 .idea
 test.ts
+
+*.ts
+!*.d.ts

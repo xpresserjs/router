@@ -1,25 +1,15 @@
 import fs = require("fs");
-
-
-// @ts-ignore
-const clone = require("lodash.clone");
-// @ts-ignore
-const snakeCase = require("lodash.snakecase");
-// Why are the above codes ts-ignored?
-// Installing the required types requires a production dependency
-// to work perfectly in consumers machine.
-// And we don't want that much prod. dependencies.
-
-import XpresserRoute = require("./src/XpresserRoute");
-import XpresserPath = require("./src/XpresserPath");
-import {ManyRoutes, RouteArray, StringOrFunction, StringOrRegExp} from "./src/custom-types";
-
+import {clone, kebabCase, merge, snakeCase} from "lodash";
+import XpresserRoute from "./src/XpresserRoute";
+import XpresserPath from "./src/XpresserPath";
+import type {ManyRoutes, RouteArray, StringOrFunction, StringOrRegExp} from "./src/custom-types";
 
 
 class XpresserRouter {
     public namespace: string = "";
     public routes: (XpresserRoute | XpresserPath)[] = [];
     private readonly xpresserInstanceGetter: (() => any) | undefined;
+    public readonly config = {pathCase: "snake"} as { pathCase: "snake" | "kebab" };
 
     constructor(namespace?: string, xpresserInstanceGetter?: () => any) {
         if (namespace !== undefined) {
@@ -28,6 +18,10 @@ class XpresserRouter {
 
         if (xpresserInstanceGetter) {
             this.xpresserInstanceGetter = xpresserInstanceGetter;
+
+            // Merge config with xpresser instance router config
+            const $ = this.xpresserInstanceGetter();
+            this.config = merge(this.config, $.config.get("router", {}));
         }
     }
 
@@ -412,17 +406,27 @@ class XpresserRouter {
 
         if (typeof path === "string" && action === undefined) {
 
-            if (path.substr(0, 1) === "=") {
+            if (path.slice(0, 1) === "=") {
 
-                action = path.substr(1);
+                action = path.slice(1);
                 path = "";
 
 
-            } else if (path.substr(0, 1) === "@") {
+            } else if (path.slice(0, 1) === "@") {
+                let $case = snakeCase;
 
-                path = path.substr(1);
+                // Switch case types.
+                if (this.config.pathCase !== "snake") {
+                    switch (this.config.pathCase) {
+                        case "kebab":
+                            $case = kebabCase;
+                    }
+                }
+
+
+                path = path.slice(1);
                 action = <string>path;
-                path = snakeCase(path as string);
+                path = $case(path as string);
             }
 
         }
@@ -452,7 +456,7 @@ class XpresserRouter {
                 let [path, action, name]: RouteArray = route
 
                 // if shortHand validate true as second param.
-                const firstChar = (path as string).substr(0, 1);
+                const firstChar = (path as string).slice(0, 1);
                 if (firstChar === '@' || firstChar === '=') {
                     if (action && name === undefined) {
                         name = action;
