@@ -1,6 +1,8 @@
 node_modules
 .idea
 test.ts
+tsconfig.json
+yarn.lock
 
 *.ts
 !*.d.ts
